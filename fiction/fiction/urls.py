@@ -17,6 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import URLPattern, path, include
 from rest_framework import routers
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+
+
 
 from fiction_fullstack.views import BookViewSet, delete_book, update_book, add_book
 
@@ -33,6 +39,7 @@ urlpatterns = [
     path('books/<int:id>', delete_book, name="delete_book"), 
     path('books/', add_book, name="add_book"),
     path('books/update/<int:id>/', update_book, name="update_book"), 
-    
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
 ]
