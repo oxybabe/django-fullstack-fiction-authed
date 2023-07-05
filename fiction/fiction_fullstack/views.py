@@ -1,14 +1,20 @@
 # from django.shortcuts import render
 # from rest_framework import APIView
+import genericpath
+from urllib import request
 from django.http import HttpResponseNotAllowed
 from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
 from .serializers import BookSerializer
 from .models import Book
+from urllib.request import urlopen
 
-from django.contrib.auth.models import Group, Permission
+# import urllib.request as urllib
+
+from django.contrib.auth.models import Group, Permission, User
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 # from rest_framework import generics
 
@@ -44,8 +50,15 @@ def delete_book(request, id):
         json_data = request.DELETE.get()
     return render(request, 'frontend/index.html', {'id':id})
 
+# user = authenticate(urllib.request, username='elia', password='password123')
+
+
+
+# login(request, user)
+# logout(request)
+
 # librarians_group = Group.objects.create(name="Librarians")
-# book_content_type = ContentType.objects.get_for_model(Book)
+# book_content_type = ContentType.objects.get(app_label="auth", model='book')
 # add_permission = Permission.objects.get(codename="add_book", name="can add book", content_type=book_content_type)
 # change_permission = Permission.objects.get(codename="change_book", name="can change book",  content_type=book_content_type)
 # delete_permission = Permission.objects.get(codename="delete_book", name="can delete book",  content_type=book_content_type)
@@ -55,7 +68,10 @@ def delete_book(request, id):
 # user = User.objects.get(username='elia')
 # user.groups.add(librarians_group)
 
-# class BookUpdateAPIView(generics.RetrieveUpdateDestroyAPIView):
+# class MyTokenObtainPairView(TokenObtainPairView):
+#     serializer_class = MyTokenObtainPairSerializer
+
+# class BookUpdateAPIView(genericpath.RetrieveUpdateDestroyAPIView):
 #     queryset = Book.objects.all()
 #     serializer_class = BookSerializer    
 
