@@ -27,6 +27,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 #         return Response(serializer.data)
 
 class BookViewSet(ModelViewSet):
+    model = Book
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     

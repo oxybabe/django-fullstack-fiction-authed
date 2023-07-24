@@ -58,6 +58,7 @@ MIDDLEWARE = [
     
 ]
 
+REST_AUTH = {"SESSION_LOGIN": False}
 
 
 CORS_ALLOW_ALL_ORIGINS = True
